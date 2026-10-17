@@ -1,0 +1,1053 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<title>KrukTime — Магазин часов</title>
+<meta name="description" content="KrukTime — наручные часы с характером. Выбирайте свою модель.">
+<style>
+:root {
+  --bg: #090909;
+  --card: #131313;
+  --gold: #d6b36a;
+  --gold2: #f2d99b;
+  --text: #f5f2eb;
+  --muted: #99958c;
+  --border: rgba(214,179,106,.22);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+button, input, textarea, select { font: inherit; }
+button { cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+.container { width: min(1180px, 92%); margin: auto; }
+
+/* HEADER */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(9,9,9,.94);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.header-inner {
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+}
+.logo {
+  font-size: 25px;
+  font-weight: 900;
+  letter-spacing: 2px;
+}
+.logo span { color: var(--gold); }
+nav { display: flex; gap: 26px; color: #d0ccc3; font-size: 14px; }
+nav a:hover { color: var(--gold); }
+.header-actions { display: flex; gap: 10px; }
+.icon-btn {
+  border: 1px solid var(--border);
+  color: var(--text);
+  background: transparent;
+  padding: 10px 13px;
+  border-radius: 8px;
+}
+.icon-btn:hover { border-color: var(--gold); }
+
+/* HERO */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(ellipse at 80% 45%, rgba(174,129,51,.15), transparent 38%),
+    linear-gradient(120deg,#090909,#15130f 60%,#090909);
+}
+.hero-inner { padding: 80px 0; max-width: 720px; }
+.eyebrow {
+  color: var(--gold);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 800;
+}
+.hero h1 {
+  font-size: clamp(42px, 7vw, 78px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin: 20px 0;
+}
+.hero h1 span { color: var(--gold); }
+.hero p {
+  max-width: 460px;
+  line-height: 1.8;
+  color: var(--muted);
+  font-size: 16px;
+}
+.primary-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gold);
+  color: #100e09;
+  border: 1px solid var(--gold);
+  border-radius: 7px;
+  padding: 14px 22px;
+  font-weight: 800;
+  margin-top: 18px;
+}
+.primary-btn:hover { background: var(--gold2); }
+.secondary-btn {
+  background: transparent;
+  color: var(--gold);
+  border: 1px solid var(--border);
+  padding: 11px 15px;
+  border-radius: 7px;
+}
+.secondary-btn:hover { border-color: var(--gold); }
+
+/* BENEFITS */
+.benefits {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 16px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--border);
+}
+.benefit { display: flex; align-items: center; gap: 12px; }
+.benefit-icon { color: var(--gold); font-size: 24px; }
+.benefit strong { display: block; font-size: 13px; }
+.benefit small { display: block; color: var(--muted); margin-top: 5px; }
+
+/* CATALOG */
+.section { padding: 65px 0; }
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.section-heading h2 { font-size: clamp(28px,4vw,40px); margin: 9px 0 0; }
+.section-heading p { color: var(--muted); margin-bottom: 0; }
+.filters { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 25px; }
+.filter-btn {
+  background: transparent;
+  color: #bdb8ae;
+  border: 1px solid #34312b;
+  padding: 9px 14px;
+  border-radius: 30px;
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--gold);
+  color: #111;
+  border-color: var(--gold);
+}
+.catalog-tools { display: flex; gap: 10px; margin-bottom: 24px; }
+.catalog-tools input, .catalog-tools select {
+  min-width: 0;
+  background: #141414;
+  color: white;
+  border: 1px solid #333;
+  border-radius: 7px;
+  padding: 12px;
+}
+.catalog-tools input { flex: 1; }
+.catalog-tools select { max-width: 190px; }
+.products {
+  display: grid;
+  grid-template-columns: repeat(4,minmax(0,1fr));
+  gap: 18px;
+}
+.product-card {
+  background: var(--card);
+  border: 1px solid #24221e;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform .2s, border-color .2s;
+}
+.product-card:hover { transform: translateY(-4px); border-color: var(--border); }
+.product-image {
+  position: relative;
+  aspect-ratio: 4/4.5;
+  background: #1b1a17;
+  overflow: hidden;
+}
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.product-image .no-image {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 55px;
+  color: var(--gold);
+}
+.product-info { padding: 16px; }
+.product-category {
+  font-size: 10px;
+  color: var(--gold);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.product-info h3 { margin: 9px 0; font-size: 16px; }
+.product-description {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  min-height: 38px;
+}
+.product-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 16px;
+}
+.price { font-weight: 800; font-size: 17px; }
+.add-btn {
+  background: var(--gold);
+  color: #111;
+  border: 0;
+  border-radius: 6px;
+  padding: 10px 12px;
+  font-weight: 800;
+}
+.add-btn:hover { background: var(--gold2); }
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 45px 15px;
+  color: var(--muted);
+}
+
+/* ABOUT */
+.about {
+  background: #10100e;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+.about h2 { font-size: 38px; line-height: 1.2; }
+.about h2 span { color: var(--gold); }
+.about p { color: var(--muted); line-height: 1.9; }
+.about-box {
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 10px;
+}
+.about-box strong { color: var(--gold); font-size: 14px; }
+
+/* FOOTER */
+footer { padding: 35px 0; color: var(--muted); font-size: 12px; }
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.footer-links { display: flex; gap: 18px; }
+.footer-links a:hover { color: var(--gold); }
+
+/* MODALS */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0,0,0,.8);
+  padding: 15px;
+  overflow-y: auto;
+}
+.modal.open { display: flex; align-items: flex-start; justify-content: center; }
+.modal-box {
+  width: min(560px,100%);
+  margin: 35px auto;
+  background: #121212;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.modal-header h2 { margin: 0; font-size: 23px; }
+.close-btn {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 28px;
+}
+.form-field { margin-bottom: 15px; }
+.form-field label {
+  display: block;
+  color: #c9c2b5;
+  font-size: 13px;
+  margin-bottom: 7px;
+}
+.form-field input, .form-field textarea, .form-field select {
+  width: 100%;
+  padding: 12px;
+  background: #1c1c1c;
+  color: white;
+  border: 1px solid #36332d;
+  border-radius: 7px;
+}
+.form-field textarea { min-height: 85px; resize: vertical; }
+.form-submit { width: 100%; }
+.cart-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  border-bottom: 1px solid #302d27;
+  padding: 14px 0;
+}
+.cart-item small { color: var(--muted); display: block; margin-top: 5px; }
+.cart-controls { display: flex; gap: 8px; align-items: center; }
+.cart-controls button {
+  background: #24221d;
+  color: white;
+  border: 1px solid #38342b;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.remove-btn { color: #e89b8d !important; }
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-size: 19px;
+}
+.notice { color: var(--muted); font-size: 12px; line-height: 1.6; }
+.admin-products { display: grid; gap: 10px; }
+.admin-product {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border: 1px solid #302d27;
+  border-radius: 7px;
+}
+.admin-product button { font-size: 12px; }
+#toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 100;
+  padding: 12px 18px;
+  background: var(--gold);
+  color: #111;
+  border-radius: 8px;
+  font-weight: 700;
+  transition: .2s;
+  width: max-content;
+  max-width: 90%;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media(max-width:850px) {
+  nav { gap: 13px; }
+  .products { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .about-grid { gap: 25px; }
+}
+@media(max-width:560px) {
+  .header-inner { min-height: 65px; gap: 8px; }
+  .logo { font-size: 21px; }
+  nav { display: none; }
+  .icon-btn { padding: 9px 10px; font-size: 12px; }
+  .hero { min-height: 410px; }
+  .hero-inner { padding: 65px 0; }
+  .hero h1 { letter-spacing: -1px; }
+  .benefits { grid-template-columns: 1fr; gap: 20px; }
+  .section { padding: 45px 0; }
+  .section-heading { align-items: start; flex-direction: column; }
+  .products { gap: 10px; }
+  .product-info { padding: 11px; }
+  .product-info h3 { font-size: 14px; }
+  .product-description { font-size: 11px; }
+  .product-bottom { align-items: start; flex-direction: column; }
+  .add-btn { width: 100%; }
+  .about-grid { grid-template-columns: 1fr; }
+  .about h2 { font-size: 31px; }
+  .catalog-tools { flex-direction: column; }
+  .catalog-tools select { max-width: none; }
+  .modal-box { padding: 18px; margin: 15px auto; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a class="logo" href="#">KRUK<span>TIME</span></a>
+    <nav>
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О бренде</a>
+      <a href="#contacts">Контакты</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" onclick="openCart()">
+        Корзина <span id="cart-count">0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="eyebrow">KrukTime · Watch collection</div>
+      <h1>Время<br>выбирать <span>своё.</span></h1>
+      <p>
+        Наручные часы, которые подчёркивают твой стиль.
+        Найди модель, которая подходит именно тебе.
+      </p>
+      <a href="#catalog" class="primary-btn">Смотреть коллекцию ↗</a>
+    </div>
+  </section>
+
+  <div class="container benefits">
+    <div class="benefit">
+      <span class="benefit-icon">◈</span>
+      <div><strong>Подбор моделей</strong><small>Разные стили и дизайны</small></div>
+    </div>
+    <div class="benefit">
+      <span class="benefit-icon">◇</span>
+      <div><strong>Удобный заказ</strong><small>Оформление онлайн</small></div>
+    </div>
+    <div class="benefit">
+      <span class="benefit-icon">✧</span>
+      <div><strong>Твой стиль</strong><small>Выбирай часы под себя</small></div>
+    </div>
+  </div>
+
+  <section class="section container" id="catalog">
+    <div class="section-heading">
+      <div>
+        <div class="eyebrow">Наша коллекция</div>
+        <h2>Каталог часов</h2>
+        <p>Выбери свою модель KrukTime.</p>
+      </div>
+    </div>
+
+    <div class="catalog-tools">
+      <input id="search" type="search" placeholder="Поиск по названию..." oninput="renderProducts()">
+      <select id="sort" onchange="renderProducts()">
+        <option value="default">Сначала рекомендуемые</option>
+        <option value="low">Сначала дешевле</option>
+        <option value="high">Сначала дороже</option>
+        <option value="name">По названию</option>
+      </select>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-filter="Все" onclick="setFilter('Все',this)">Все часы</button>
+      <button class="filter-btn" data-filter="Мужские" onclick="setFilter('Мужские',this)">Мужские</button>
+      <button class="filter-btn" data-filter="Женские" onclick="setFilter('Женские',this)">Женские</button>
+      <button class="filter-btn" data-filter="Унисекс" onclick="setFilter('Унисекс',this)">Унисекс</button>
+    </div>
+
+    <div class="products" id="products"></div>
+  </section>
+
+  <section class="about section" id="about">
+    <div class="container about-grid">
+      <div>
+        <div class="eyebrow">О KrukTime</div>
+        <h2>Твой стиль.<br><span>Твоё время.</span></h2>
+        <p>
+          KrukTime — магазин наручных часов для тех, кто ценит
+          внешний вид, индивидуальность и возможность подобрать
+          аксессуар под свой образ.
+        </p>
+        <p>
+          Выбирай понравившуюся модель, добавляй её в корзину
+          и оформляй заказ прямо на сайте.
+        </p>
+      </div>
+      <div class="about-box">
+        <strong>KRUKTIME / YOUR TIME</strong>
+        <p>Мы стремимся сделать выбор часов удобным и понятным.</p>
+        <p>Ознакомься с каталогом и найди свою модель.</p>
+        <a class="secondary-btn" href="#catalog">Перейти в каталог →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contacts">
+  <div class="container footer-inner">
+    <div>
+      <a class="logo" href="#">KRUK<span>TIME</span></a>
+      <p>© <span id="year"></span> KrukTime. Все права защищены.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О бренде</a>
+      <a href="#" onclick="openCart();return false">Корзина</a>
+    </div>
+  </div>
+</footer>
+
+<!-- КОРЗИНА -->
+<div class="modal" id="cart-modal" role="dialog" aria-modal="true" aria-label="Корзина">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Твоя корзина</h2>
+      <button class="close-btn" onclick="closeModal('cart-modal')" aria-label="Закрыть">×</button>
+    </div>
+    <div id="cart-items"></div>
+    <div class="cart-total">
+      <span>Итого</span><strong id="cart-total">0 ₽</strong>
+    </div>
+    <button class="primary-btn form-submit" onclick="openCheckout()">Оформить заказ</button>
+    <p class="notice">Перед оформлением проверь выбранные модели и количество.</p>
+  </div>
+</div>
+
+<!-- ОФОРМЛЕНИЕ ЗАКАЗА -->
+<div class="modal" id="checkout-modal" role="dialog" aria-modal="true" aria-label="Оформление заказа">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Оформление заказа</h2>
+      <button class="close-btn" onclick="closeModal('checkout-modal')" aria-label="Закрыть">×</button>
+    </div>
+    <form id="checkout-form">
+      <div class="form-field">
+        <label for="customer-name">Твоё имя *</label>
+        <input id="customer-name" name="name" required maxlength="100" autocomplete="name">
+      </div>
+      <div class="form-field">
+        <label for="customer-phone">Телефон для связи *</label>
+        <input id="customer-phone" name="phone" type="tel" required maxlength="30" autocomplete="tel">
+      </div>
+      <div class="form-field">
+        <label for="customer-email">Электронная почта (необязательно)</label>
+        <input id="customer-email" name="email" type="email" maxlength="150" autocomplete="email">
+      </div>
+      <div class="form-field">
+        <label for="customer-address">Адрес или способ доставки</label>
+        <textarea id="customer-address" name="address" maxlength="500" placeholder="Укажи удобный способ получения заказа"></textarea>
+      </div>
+      <div class="form-field">
+        <label for="customer-comment">Комментарий к заказу</label>
+        <textarea id="customer-comment" name="comment" maxlength="500"></textarea>
+      </div>
+      <button class="primary-btn form-submit" type="submit">Подтвердить заказ</button>
+      <p class="notice">
+        Сейчас это демонстрационная версия оформления.
+        Заказ не будет автоматически отправлен продавцу.
+      </p>
+    </form>
+  </div>
+</div>
+
+<!-- ПАНЕЛЬ УПРАВЛЕНИЯ: ДЕМО -->
+<div class="modal" id="admin-modal" role="dialog" aria-modal="true" aria-label="Управление товарами">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>Управление товарами</h2>
+      <button class="close-btn" onclick="closeModal('admin-modal')" aria-label="Закрыть">×</button>
+    </div>
+
+    <p class="notice">
+      Демонстрационная панель. Изменения сохраняются только в этом браузере.
+      Перед публикацией необходимо подключить защищённую авторизацию
+      и общую базу данных.
+    </p>
+
+    <form id="product-form">
+      <input type="hidden" id="edit-id">
+      <div class="form-field">
+        <label for="product-name">Название модели *</label>
+        <input id="product-name" required maxlength="100">
+      </div>
+      <div class="form-field">
+        <label for="product-price">Цена в рублях *</label>
+        <input id="product-price" type="number" min="1" max="100000000" required>
+      </div>
+      <div class="form-field">
+        <label for="product-category">Категория</label>
+        <select id="product-category">
+          <option>Мужские</option>
+          <option>Женские</option>
+          <option>Унисекс</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label for="product-image">Ссылка на фотографию</label>
+        <input id="product-image" type="url" placeholder="https://example.com/watch.jpg" maxlength="1000">
+      </div>
+      <div class="form-field">
+        <label for="product-description">Описание</label>
+        <textarea id="product-description" maxlength="1000"></textarea>
+      </div>
+      <button class="primary-btn form-submit" type="submit">Сохранить товар</button>
+    </form>
+
+    <h3>Товары в каталоге</h3>
+    <div class="admin-products" id="admin-products"></div>
+  </div>
+</div>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+const STORAGE_PRODUCTS = "kruktime_demo_products_v1";
+const STORAGE_CART = "kruktime_demo_cart_v1";
+const STORAGE_ORDERS = "kruktime_demo_orders_v1";
+
+const starterProducts = [
+  {
+    id: "demo-1",
+    name: "Classic Black",
+    price: 3490,
+    category: "Мужские",
+    image: "",
+    description: "Классический дизайн на каждый день."
+  },
+  {
+    id: "demo-2",
+    name: "Golden Edition",
+    price: 4290,
+    category: "Мужские",
+    image: "",
+    description: "Элегантный акцент в золотом цвете."
+  },
+  {
+    id: "demo-3",
+    name: "Elegant Rose",
+    price: 3790,
+    category: "Женские",
+    image: "",
+    description: "Изящный аксессуар для стильного образа."
+  },
+  {
+    id: "demo-4",
+    name: "Urban Silver",
+    price: 2990,
+    category: "Унисекс",
+    image: "",
+    description: "Минимализм и универсальный стиль."
+  }
+];
+
+function loadJSON(key, fallback) {
+  try {
+    const value = localStorage.getItem(key);
+    return value === null ? fallback : JSON.parse(value);
+  } catch {
+    return fallback;
+  }
+}
+
+let products = loadJSON(STORAGE_PRODUCTS, starterProducts);
+let cart = loadJSON(STORAGE_CART, []);
+let activeFilter = "Все";
+
+function saveProducts() {
+  localStorage.setItem(STORAGE_PRODUCTS, JSON.stringify(products));
+}
+
+function saveCart() {
+  localStorage.setItem(STORAGE_CART, JSON.stringify(cart));
+}
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function money(value) {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "currency",
+    currency: "RUB",
+    maximumFractionDigits: 0
+  }).format(value);
+}
+
+function toast(message) {
+  const el = document.getElementById("toast");
+  el.textContent = message;
+  el.classList.add("show");
+  clearTimeout(toast.timer);
+  toast.timer = setTimeout(() => el.classList.remove("show"), 2600);
+}
+
+function imageHTML(product) {
+  if (!product.image) {
+    return '<div class="no-image" aria-label="Фотография пока не добавлена">⌚</div>';
+  }
+
+  return `<img src="${escapeHTML(product.image)}"
+    alt="${escapeHTML(product.name)}"
+    loading="lazy"
+    onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'no-image',textContent:'⌚'}))">`;
+}
+
+function renderProducts() {
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  const sort = document.getElementById("sort").value;
+
+  let list = products.filter(product => {
+    const matchesCategory = activeFilter === "Все" || product.category === activeFilter;
+    const matchesSearch = (product.name + " " + product.description)
+      .toLowerCase().includes(query);
+    return matchesCategory && matchesSearch;
+  });
+
+  if (sort === "low") list.sort((a,b) => a.price - b.price);
+  if (sort === "high") list.sort((a,b) => b.price - a.price);
+  if (sort === "name") list.sort((a,b) => a.name.localeCompare(b.name, "ru"));
+
+  const root = document.getElementById("products");
+
+  if (!list.length) {
+    root.innerHTML = '<div class="empty-state">Ничего не найдено. Попробуй изменить поиск.</div>';
+    return;
+  }
+
+  root.innerHTML = list.map(product => `
+    <article class="product-card">
+      <div class="product-image">${imageHTML(product)}</div>
+      <div class="product-info">
+        <div class="product-category">${escapeHTML(product.category)}</div>
+        <h3>${escapeHTML(product.name)}</h3>
+        <div class="product-description">${escapeHTML(product.description)}</div>
+        <div class="product-bottom">
+          <div class="price">${money(product.price)}</div>
+          <button class="add-btn" onclick="addToCart('${escapeHTML(product.id)}')">
+            В корзину +
+          </button>
+        </div>
+      </div>
+    </article>
+  `).join("");
+}
+
+function setFilter(filter, button) {
+  activeFilter = filter;
+  document.querySelectorAll(".filter-btn").forEach(el => el.classList.remove("active"));
+  button.classList.add("active");
+  renderProducts();
+}
+
+function addToCart(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  const existing = cart.find(item => item.id === id);
+  if (existing) existing.quantity += 1;
+  else cart.push({ id, quantity: 1 });
+
+  saveCart();
+  updateCartCount();
+  toast("Добавлено в корзину");
+}
+
+function updateCartCount() {
+  const count = cart.reduce((sum,item) => sum + item.quantity, 0);
+  document.getElementById("cart-count").textContent = count;
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal(id) {
+  document.getElementById(id).classList.remove("open");
+  if (!document.querySelector(".modal.open")) {
+    document.body.style.overflow = "";
+  }
+}
+
+function openCart() {
+  renderCart();
+  openModal("cart-modal");
+}
+
+function renderCart() {
+  cart = cart.filter(item => products.some(p => p.id === item.id));
+  saveCart();
+
+  const root = document.getElementById("cart-items");
+
+  if (!cart.length) {
+    root.innerHTML = '<p class="notice">Корзина пока пуста. Выбери часы из каталога.</p>';
+  } else {
+    root.innerHTML = cart.map(item => {
+      const product = products.find(p => p.id === item.id);
+      return `
+        <div class="cart-item">
+          <div>
+            <strong>${escapeHTML(product.name)}</strong>
+            <small>${money(product.price)} за шт.</small>
+          </div>
+          <div class="cart-controls">
+            <button onclick="changeQuantity('${escapeHTML(item.id)}',-1)" aria-label="Уменьшить">−</button>
+            <span>${item.quantity}</span>
+            <button onclick="changeQuantity('${escapeHTML(item.id)}',1)" aria-label="Увеличить">+</button>
+            <button class="remove-btn" onclick="removeFromCart('${escapeHTML(item.id)}')" aria-label="Удалить">×</button>
+          </div>
+        </div>
+      `;
+    }).join("");
+  }
+
+  const total = cart.reduce((sum,item) => {
+    const p = products.find(product => product.id === item.id);
+    return sum + (p ? p.price * item.quantity : 0);
+  }, 0);
+
+  document.getElementById("cart-total").textContent = money(total);
+  updateCartCount();
+}
+
+function changeQuantity(id, delta) {
+  const item = cart.find(entry => entry.id === id);
+  if (!item) return;
+
+  item.quantity += delta;
+  if (item.quantity <= 0) cart = cart.filter(entry => entry.id !== id);
+
+  saveCart();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  cart = cart.filter(item => item.id !== id);
+  saveCart();
+  renderCart();
+}
+
+function openCheckout() {
+  if (!cart.length) {
+    toast("Сначала добавь часы в корзину");
+    return;
+  }
+  closeModal("cart-modal");
+  openModal("checkout-modal");
+}
+
+document.getElementById("checkout-form").addEventListener("submit", event => {
+  event.preventDefault();
+
+  if (!cart.length) {
+    toast("Корзина пуста");
+    closeModal("checkout-modal");
+    return;
+  }
+
+  const form = new FormData(event.currentTarget);
+
+  const order = {
+    id: "DEMO-" + Date.now(),
+    createdAt: new Date().toISOString(),
+    customer: {
+      name: String(form.get("name") || "").trim(),
+      phone: String(form.get("phone") || "").trim(),
+      email: String(form.get("email") || "").trim(),
+      address: String(form.get("address") || "").trim(),
+      comment: String(form.get("comment") || "").trim()
+    },
+    items: cart.map(item => {
+      const product = products.find(p => p.id === item.id);
+      return {
+        id: item.id,
+        name: product.name,
+        price: product.price,
+        quantity: item.quantity
+      };
+    })
+  };
+
+  order.total = order.items.reduce((sum,item) => sum + item.price * item.quantity, 0);
+
+  const orders = loadJSON(STORAGE_ORDERS, []);
+  orders.push(order);
+  localStorage.setItem(STORAGE_ORDERS, JSON.stringify(orders));
+
+  cart = [];
+  saveCart();
+  updateCartCount();
+  event.currentTarget.reset();
+  closeModal("checkout-modal");
+
+  toast("Демо-заказ сохранён в этом браузере");
+});
+
+function renderAdminProducts() {
+  const root = document.getElementById("admin-products");
+
+  if (!products.length) {
+    root.innerHTML = '<p class="notice">Товаров пока нет.</p>';
+    return;
+  }
+
+  root.innerHTML = products.map(product => `
+    <div class="admin-product">
+      <div>
+        <strong>${escapeHTML(product.name)}</strong>
+        <div class="notice">${money(product.price)}</div>
+      </div>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="secondary-btn" onclick="editProduct('${escapeHTML(product.id)}')">Изменить</button>
+        <button class="secondary-btn" onclick="deleteProduct('${escapeHTML(product.id)}')">Удалить</button>
+      </div>
+    </div>
+  `).join("");
+}
+
+function openAdmin() {
+  renderAdminProducts();
+  openModal("admin-modal");
+}
+
+function editProduct(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  document.getElementById("edit-id").value = product.id;
+  document.getElementById("product-name").value = product.name;
+  document.getElementById("product-price").value = product.price;
+  document.getElementById("product-category").value = product.category;
+  document.getElementById("product-image").value = product.image || "";
+  document.getElementById("product-description").value = product.description || "";
+
+  document.getElementById("product-name").scrollIntoView({ behavior: "smooth", block: "center" });
+}
+
+document.getElementById("product-form").addEventListener("submit", event => {
+  event.preventDefault();
+
+  const id = document.getElementById("edit-id").value;
+  const name = document.getElementById("product-name").value.trim();
+  const price = Number(document.getElementById("product-price").value);
+  const category = document.getElementById("product-category").value;
+  const image = document.getElementById("product-image").value.trim();
+  const description = document.getElementById("product-description").value.trim();
+
+  if (!name || !Number.isSafeInteger(price) || price < 1 || price > 100000000) {
+    toast("Проверь название и цену");
+    return;
+  }
+
+  const product = {
+    id: id || ("product-" + Date.now()),
+    name,
+    price,
+    category,
+    image,
+    description
+  };
+
+  if (id) {
+    products = products.map(item => item.id === id ? product : item);
+  } else {
+    products.push(product);
+  }
+
+  saveProducts();
+  renderProducts();
+  renderAdminProducts();
+  event.currentTarget.reset();
+  document.getElementById("edit-id").value = "";
+
+  toast("Изменения сохранены в этом браузере");
+});
+
+function deleteProduct(id) {
+  const product = products.find(item => item.id === id);
+  if (!product) return;
+
+  if (!confirm("Удалить товар «" + product.name + "»?")) return;
+
+  products = products.filter(item => item.id !== id);
+  cart = cart.filter(item => item.id !== id);
+
+  saveProducts();
+  saveCart();
+  renderProducts();
+  renderCart();
+  renderAdminProducts();
+  toast("Товар удалён");
+}
+
+document.querySelectorAll(".modal").forEach(modal => {
+  modal.addEventListener("click", event => {
+    if (event.target === modal) closeModal(modal.id);
+  });
+});
+
+document.addEventListener("keydown", event => {
+  if (event.key === "Escape") {
+    document.querySelectorAll(".modal.open").forEach(modal => closeModal(modal.id));
+  }
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+renderProducts();
+updateCartCount();
+
+/*
+  ВРЕМЕННОЕ ДЕМО-УПРАВЛЕНИЕ
+
+  Чтобы открыть демонстрационную панель в браузере,
+  добавь к адресу сайта #admin
+
+  Например:
+  https://username.github.io/kruktime/#admin
+
+  Эта панель НЕ защищена авторизацией.
+  Не используй её как настоящую админ-панель
+  на опубликованном магазине.
+*/
+if (location.hash === "#admin") {
+  openAdmin();
+}
+</script>
+</body>
+</html>
